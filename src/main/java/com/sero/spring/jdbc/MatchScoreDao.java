@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.sero.spring.jdbc.Team;
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -32,6 +33,24 @@ public class MatchScoreDao {
         Serializable returnVal = getCurrentSession().save(matchScore);
 
         System.out.println(returnVal);
+    }
+
+    @Transactional
+    public MatchScore getMatchScore(int id) {
+        Criteria criteria = getCurrentSession().createCriteria(MatchScore.class);
+        criteria.add(Restrictions.eq("id", id));
+        return (MatchScore)criteria.uniqueResult();
+    }
+
+    @Transactional
+    public void updateMatchScore(MatchScore matchScore) {
+        getCurrentSession().update(matchScore);
+    }
+
+    @Transactional
+    public void deleteMatchScore(int id) {
+        MatchScore matchScore = this.getMatchScore(id);
+        getCurrentSession().delete(matchScore);
     }
 
     @Transactional

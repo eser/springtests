@@ -31,7 +31,8 @@ public class MatchScoreController {
     }
 
     @RequestMapping(path = "/add", method = RequestMethod.POST)
-    public RedirectView addMatchScore(@RequestParam("hometeam") int homeTeam, @RequestParam("homescore") int homeScore, @RequestParam("awayteam") int awayTeam, @RequestParam("awayscore") int awayScore){
+    public RedirectView addMatchScore(@RequestParam("hometeam") int homeTeam, @RequestParam("homescore") int homeScore, @RequestParam("awayteam") int awayTeam, @RequestParam("awayscore") int awayScore)
+    {
         MatchScore matchScore = new MatchScore();
         matchScore.setHomeTeam(homeTeam);
         matchScore.setHomeScore(homeScore);
@@ -42,4 +43,27 @@ public class MatchScoreController {
 
         return new RedirectView("list", true);
     }
+
+    @RequestMapping(path = "/update", method = RequestMethod.POST)
+    public RedirectView updateMatchScore(@RequestParam("id") int id, @RequestParam("hometeam") int homeTeam, @RequestParam("homescore") int homeScore, @RequestParam("awayteam") int awayTeam, @RequestParam("awayscore") int awayScore)
+    {
+        MatchScore matchScore = matchScoreDao.getMatchScore(id);
+        matchScore.setHomeTeam(homeTeam);
+        matchScore.setHomeScore(homeScore);
+        matchScore.setAwayTeam(awayTeam);
+        matchScore.setAwayScore(awayScore);
+
+        matchScoreDao.updateMatchScore(matchScore);
+
+        return new RedirectView("list", true);
+    }
+
+    @RequestMapping(path = "/delete", method = RequestMethod.POST)
+    public RedirectView addMatchScore(@RequestParam("id") int id)
+    {
+        matchScoreDao.deleteMatchScore(id);
+
+        return new RedirectView("list", true);
+    }
+
 }

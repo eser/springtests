@@ -34,4 +34,22 @@ public class TeamController {
 
         return new RedirectView("list", true);
     }
+
+    @RequestMapping(path = "/update", method = RequestMethod.POST)
+    public RedirectView updateTeam(@RequestParam("id") int id, @RequestParam("name") String name) {
+        Team team = teamDao.getTeam(id);
+        team.setName(name);
+
+        teamDao.updateTeam(team);
+
+        return new RedirectView("list", true);
+    }
+
+    @RequestMapping(path = "/delete", method = RequestMethod.POST)
+    public RedirectView addTeam(@RequestParam("id") int id) {
+        teamDao.deleteTeam(id);
+
+        return new RedirectView("list", true);
+    }
+
 }

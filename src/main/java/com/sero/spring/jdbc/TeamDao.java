@@ -28,14 +28,32 @@ public class TeamDao {
     private SessionFactory sessionFactory;
 
     @Transactional
-    public void addTeam(Team team){
+    public void addTeam(Team team) {
         Serializable returnVal = getCurrentSession().save(team);
 
         System.out.println(returnVal);
     }
 
     @Transactional
-    public List<Team> getAllTeams(){
+    public Team getTeam(int id) {
+        Criteria criteria = getCurrentSession().createCriteria(Team.class);
+        criteria.add(Restrictions.eq("id", id));
+        return (Team)criteria.uniqueResult();
+    }
+
+    @Transactional
+    public void updateTeam(Team team) {
+        getCurrentSession().update(team);
+    }
+
+    @Transactional
+    public void deleteTeam(int id) {
+        Team team = this.getTeam(id);
+        getCurrentSession().delete(team);
+    }
+
+    @Transactional
+    public List<Team> getAllTeams() {
         Criteria criteria = getCurrentSession().createCriteria(Team.class);
         return criteria.list();
     }
