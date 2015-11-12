@@ -18,15 +18,15 @@ public class TeamController {
     private TeamDao teamDao;
 
     @RequestMapping("/list")
-    public ModelAndView getTeams(){
-        ModelAndView mav = new ModelAndView("teams");
-        mav.addObject("teams", teamDao.getAllTeams());
+    public ModelAndView getTeams() {
+        ModelAndView teamMav = new ModelAndView("teams");
+        teamMav.addObject("teams", teamDao.getAllTeams());
 
-        return mav;
+        return teamMav;
     }
 
     @RequestMapping(path = "/add", method = RequestMethod.POST)
-    public RedirectView addTeam(@RequestParam("name") String name){
+    public RedirectView addTeam(@RequestParam("name") String name) {
         Team team = new Team();
         team.setName(name);
 

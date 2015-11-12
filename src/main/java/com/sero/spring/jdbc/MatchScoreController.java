@@ -17,12 +17,17 @@ public class MatchScoreController {
     @Autowired
     private MatchScoreDao matchScoreDao;
 
-    @RequestMapping("/list")
-    public ModelAndView getMatchScores(){
-        ModelAndView mav = new ModelAndView("matchscores");
-        mav.addObject("matchscores", matchScoreDao.getAllMatchScores());
+    @Autowired
+    private TeamDao teamDao;
 
-        return mav;
+    @RequestMapping("/list")
+    public ModelAndView getMatchScores()
+    {
+        ModelAndView matchScoresMav = new ModelAndView("matchscores");
+        matchScoresMav.addObject("teams", teamDao.getAllTeams());
+        // matchScoresMav.addObject("matchscores", matchScoreDao.getAllMatchScores());
+
+        return matchScoresMav;
     }
 
     @RequestMapping(path = "/add", method = RequestMethod.POST)

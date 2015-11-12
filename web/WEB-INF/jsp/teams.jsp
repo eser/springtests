@@ -5,6 +5,9 @@
 <h2>Add Team</h2>
 
 <form action="add" method="post">
+    <input type="hidden"
+           name="${_csrf.parameterName}"
+           value="${_csrf.token}"/>
     <table>
         <tr>
             <td>Name:</td>
