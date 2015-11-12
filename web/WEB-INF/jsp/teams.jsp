@@ -45,6 +45,7 @@
                 <td>${team.hometeam}</td>
                 <td>${team.awayteam}</td>
                 <td>${team.homescore} - ${team.awayscore}</td>
+                <td><a href="delete/${team.id}">Delete</a></td>
             </tr>
             </c:forEach>
         </tbody>                        

@@ -46,7 +46,7 @@ public class TeamController {
         return new RedirectView("list", true);
     }
 
-    @RequestMapping(path = "/delete", method = RequestMethod.POST)
+    @RequestMapping(path = "/delete")
     public RedirectView addTeam(@RequestParam("id") int id) {
         teamDao.deleteTeam(id);
 

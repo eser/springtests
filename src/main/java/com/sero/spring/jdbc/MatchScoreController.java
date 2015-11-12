@@ -17,10 +17,10 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequestMapping("/matchscore")
 public class MatchscoreController {
 
-    // @Autowired
+    @Autowired
     private MatchscoreDao matchscoreDao;
 
-    // @Autowired
+    @Autowired
     private TeamDao teamDao;
 
     @RequestMapping("/list")
@@ -61,7 +61,7 @@ public class MatchscoreController {
         return new RedirectView("list", true);
     }
 
-    @RequestMapping(path = "/delete", method = RequestMethod.POST)
+    @RequestMapping(path = "/delete")
     public RedirectView addMatchscore(@RequestParam("id") int id)
     {
         matchscoreDao.deleteMatchscore(id);
