@@ -3,7 +3,7 @@ package com.sero.spring.jdbc;
 import java.io.Serializable;
 import java.util.List;
 
-import com.sero.spring.jdbc.Team;
+import com.sero.spring.jdbc.Matchscore;
 import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -23,39 +23,39 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Repository
-public class MatchScoreDao {
+public class MatchscoreDao {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     @Transactional
-    public void addMatchScore(MatchScore matchScore){
-        Serializable returnVal = getCurrentSession().save(matchScore);
+    public void addMatchscore(Matchscore matchscore){
+        Serializable returnVal = getCurrentSession().save(matchscore);
 
         System.out.println(returnVal);
     }
 
     @Transactional
-    public MatchScore getMatchScore(int id) {
-        Criteria criteria = getCurrentSession().createCriteria(MatchScore.class);
+    public Matchscore getMatchscore(int id) {
+        Criteria criteria = getCurrentSession().createCriteria(Matchscore.class);
         criteria.add(Restrictions.eq("id", id));
-        return (MatchScore)criteria.uniqueResult();
+        return (Matchscore)criteria.uniqueResult();
     }
 
     @Transactional
-    public void updateMatchScore(MatchScore matchScore) {
-        getCurrentSession().update(matchScore);
+    public void updateMatchscore(Matchscore matchscore) {
+        getCurrentSession().update(matchscore);
     }
 
     @Transactional
-    public void deleteMatchScore(int id) {
-        MatchScore matchScore = this.getMatchScore(id);
-        getCurrentSession().delete(matchScore);
+    public void deleteMatchscore(int id) {
+        Matchscore matchscore = this.getMatchscore(id);
+        getCurrentSession().delete(matchscore);
     }
 
     @Transactional
-    public List<MatchScore> getAllMatchScores(){
-        Criteria criteria = getCurrentSession().createCriteria(MatchScore.class);
+    public List<Matchscore> getAllMatchscores(){
+        Criteria criteria = getCurrentSession().createCriteria(Matchscore.class);
         return criteria.list();
     }
 

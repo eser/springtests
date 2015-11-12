@@ -2,6 +2,9 @@ package com.sero.spring.jdbc;
 
 import com.sero.spring.jdbc.TeamDao;
 import com.sero.spring.jdbc.Team;
+import com.sero.spring.jdbc.MatchscoreDao;
+import com.sero.spring.jdbc.Matchscore;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,58 +15,58 @@ import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 @RequestMapping("/matchscore")
-public class MatchScoreController {
+public class MatchscoreController {
 
-    @Autowired
-    private MatchScoreDao matchScoreDao;
+    // @Autowired
+    private MatchscoreDao matchscoreDao;
 
-    @Autowired
+    // @Autowired
     private TeamDao teamDao;
 
-    @RequestMapping("/list.form")
-    public ModelAndView getMatchScores()
+    @RequestMapping("/list")
+    public ModelAndView getMatchscores()
     {
-        ModelAndView matchScoresMav = new ModelAndView("matchscores");
-        // matchScoresMav.addObject("teams", teamDao.getAllTeams());
-        // matchScoresMav.addObject("matchscores", matchScoreDao.getAllMatchScores());
+        ModelAndView matchscoresMav = new ModelAndView("matchscores");
+        matchscoresMav.addObject("teams", teamDao.getAllTeams());
+        matchscoresMav.addObject("matchscores", matchscoreDao.getAllMatchscores());
 
-        return matchScoresMav;
+        return matchscoresMav;
     }
 
-    @RequestMapping(path = "/add.form", method = RequestMethod.POST)
-    public RedirectView addMatchScore(@RequestParam("hometeam") int homeTeam, @RequestParam("homescore") int homeScore, @RequestParam("awayteam") int awayTeam, @RequestParam("awayscore") int awayScore)
+    @RequestMapping(path = "/add", method = RequestMethod.POST)
+    public RedirectView addMatchscore(@RequestParam("hometeam") int homeTeam, @RequestParam("homescore") int homeScore, @RequestParam("awayteam") int awayTeam, @RequestParam("awayscore") int awayScore)
     {
-        MatchScore matchScore = new MatchScore();
-        matchScore.setHomeTeam(homeTeam);
-        matchScore.setHomeScore(homeScore);
-        matchScore.setAwayTeam(awayTeam);
-        matchScore.setAwayScore(awayScore);
+        Matchscore matchscore = new Matchscore();
+        matchscore.setHomeTeam(homeTeam);
+        matchscore.setHomeScore(homeScore);
+        matchscore.setAwayTeam(awayTeam);
+        matchscore.setAwayScore(awayScore);
 
-        matchScoreDao.addMatchScore(matchScore);
+        matchscoreDao.addMatchscore(matchscore);
 
-        return new RedirectView("list.form", true);
+        return new RedirectView("list", true);
     }
 
-    @RequestMapping(path = "/update.form", method = RequestMethod.POST)
-    public RedirectView updateMatchScore(@RequestParam("id") int id, @RequestParam("hometeam") int homeTeam, @RequestParam("homescore") int homeScore, @RequestParam("awayteam") int awayTeam, @RequestParam("awayscore") int awayScore)
+    @RequestMapping(path = "/update", method = RequestMethod.POST)
+    public RedirectView updateMatchscore(@RequestParam("id") int id, @RequestParam("hometeam") int homeTeam, @RequestParam("homescore") int homeScore, @RequestParam("awayteam") int awayTeam, @RequestParam("awayscore") int awayScore)
     {
-        MatchScore matchScore = matchScoreDao.getMatchScore(id);
-        matchScore.setHomeTeam(homeTeam);
-        matchScore.setHomeScore(homeScore);
-        matchScore.setAwayTeam(awayTeam);
-        matchScore.setAwayScore(awayScore);
+        Matchscore matchscore = matchscoreDao.getMatchscore(id);
+        matchscore.setHomeTeam(homeTeam);
+        matchscore.setHomeScore(homeScore);
+        matchscore.setAwayTeam(awayTeam);
+        matchscore.setAwayScore(awayScore);
 
-        matchScoreDao.updateMatchScore(matchScore);
+        matchscoreDao.updateMatchscore(matchscore);
 
-        return new RedirectView("list.form", true);
+        return new RedirectView("list", true);
     }
 
-    @RequestMapping(path = "/delete.form", method = RequestMethod.POST)
-    public RedirectView addMatchScore(@RequestParam("id") int id)
+    @RequestMapping(path = "/delete", method = RequestMethod.POST)
+    public RedirectView addMatchscore(@RequestParam("id") int id)
     {
-        matchScoreDao.deleteMatchScore(id);
+        matchscoreDao.deleteMatchscore(id);
 
-        return new RedirectView("list.form", true);
+        return new RedirectView("list", true);
     }
 
 }
