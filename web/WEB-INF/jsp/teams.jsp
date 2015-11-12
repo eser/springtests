@@ -5,9 +5,7 @@
 <h2>Add Team</h2>
 
 <form action="add" method="post">
-    <input type="hidden"
-           name="${_csrf.parameterName}"
-           value="${_csrf.token}"/>
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <table>
         <tr>
             <td>Name:</td>
@@ -33,6 +31,24 @@
             </tr>
         </c:forEach>
     </table>
+    <table id="result-table">
+        <thead>
+            <tr>
+                <th>Home</th>
+                <th>Away</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach var="team" items="${teams}">
+            <tr>
+                <td>${team.hometeam}</td>
+                <td>${team.awayteam}</td>
+                <td>${team.homescore} - ${team.awayscore}</td>
+            </tr>
+            </c:forEach>
+        </tbody>                        
+    </table>    
 </c:if>
 
 </body>
