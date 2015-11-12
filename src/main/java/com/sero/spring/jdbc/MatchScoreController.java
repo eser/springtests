@@ -20,17 +20,17 @@ public class MatchScoreController {
     @Autowired
     private TeamDao teamDao;
 
-    @RequestMapping("/list")
+    @RequestMapping("/list.form")
     public ModelAndView getMatchScores()
     {
         ModelAndView matchScoresMav = new ModelAndView("matchscores");
-        matchScoresMav.addObject("teams", teamDao.getAllTeams());
+        // matchScoresMav.addObject("teams", teamDao.getAllTeams());
         // matchScoresMav.addObject("matchscores", matchScoreDao.getAllMatchScores());
 
         return matchScoresMav;
     }
 
-    @RequestMapping(path = "/add", method = RequestMethod.POST)
+    @RequestMapping(path = "/add.form", method = RequestMethod.POST)
     public RedirectView addMatchScore(@RequestParam("hometeam") int homeTeam, @RequestParam("homescore") int homeScore, @RequestParam("awayteam") int awayTeam, @RequestParam("awayscore") int awayScore)
     {
         MatchScore matchScore = new MatchScore();
@@ -41,10 +41,10 @@ public class MatchScoreController {
 
         matchScoreDao.addMatchScore(matchScore);
 
-        return new RedirectView("list", true);
+        return new RedirectView("list.form", true);
     }
 
-    @RequestMapping(path = "/update", method = RequestMethod.POST)
+    @RequestMapping(path = "/update.form", method = RequestMethod.POST)
     public RedirectView updateMatchScore(@RequestParam("id") int id, @RequestParam("hometeam") int homeTeam, @RequestParam("homescore") int homeScore, @RequestParam("awayteam") int awayTeam, @RequestParam("awayscore") int awayScore)
     {
         MatchScore matchScore = matchScoreDao.getMatchScore(id);
@@ -55,15 +55,15 @@ public class MatchScoreController {
 
         matchScoreDao.updateMatchScore(matchScore);
 
-        return new RedirectView("list", true);
+        return new RedirectView("list.form", true);
     }
 
-    @RequestMapping(path = "/delete", method = RequestMethod.POST)
+    @RequestMapping(path = "/delete.form", method = RequestMethod.POST)
     public RedirectView addMatchScore(@RequestParam("id") int id)
     {
         matchScoreDao.deleteMatchScore(id);
 
-        return new RedirectView("list", true);
+        return new RedirectView("list.form", true);
     }
 
 }

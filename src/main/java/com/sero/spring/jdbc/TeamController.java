@@ -17,39 +17,39 @@ public class TeamController {
     @Autowired
     private TeamDao teamDao;
 
-    @RequestMapping("/list")
+    @RequestMapping("/list.form")
     public ModelAndView getTeams() {
         ModelAndView teamMav = new ModelAndView("teams");
-        teamMav.addObject("teams", teamDao.getAllTeams());
+        teamMav.addObject("teams.form", teamDao.getAllTeams());
 
         return teamMav;
     }
 
-    @RequestMapping(path = "/add", method = RequestMethod.POST)
+    @RequestMapping(path = "/add.form", method = RequestMethod.POST)
     public RedirectView addTeam(@RequestParam("name") String name) {
         Team team = new Team();
         team.setName(name);
 
         teamDao.addTeam(team);
 
-        return new RedirectView("list", true);
+        return new RedirectView("list.form", true);
     }
 
-    @RequestMapping(path = "/update", method = RequestMethod.POST)
+    @RequestMapping(path = "/update.form", method = RequestMethod.POST)
     public RedirectView updateTeam(@RequestParam("id") int id, @RequestParam("name") String name) {
         Team team = teamDao.getTeam(id);
         team.setName(name);
 
         teamDao.updateTeam(team);
 
-        return new RedirectView("list", true);
+        return new RedirectView("list.form", true);
     }
 
-    @RequestMapping(path = "/delete", method = RequestMethod.POST)
+    @RequestMapping(path = "/delete.form", method = RequestMethod.POST)
     public RedirectView addTeam(@RequestParam("id") int id) {
         teamDao.deleteTeam(id);
 
-        return new RedirectView("list", true);
+        return new RedirectView("list.form", true);
     }
 
 }
