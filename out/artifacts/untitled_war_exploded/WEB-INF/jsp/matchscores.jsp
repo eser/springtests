@@ -53,11 +53,6 @@
                     <tr>
                         <td>Home Team</td>
                         <td>
-                            <select name="hometeam" id="hometeam">
-                                <option>Arsenallll</option>
-                                <option>2</option>
-                                <option>3</option>
-                            </select>
                             <select name="hometeam">
                             <c:forEach var="team" items="${teams}">
                                 <option value="${team.id}">${team.name}</option>

@@ -24,32 +24,15 @@
         <caption>List of Teams</caption>
         <tr>
             <td>Name</td>
+            <td></td>
         </tr>
         <c:forEach var="team" items="${teams}">
             <tr>
                 <td>${team.name}</td>
+                <td><a href="delete/${team.id}">Delete</a></td>
             </tr>
         </c:forEach>
     </table>
-    <table id="result-table">
-        <thead>
-            <tr>
-                <th>Home</th>
-                <th>Away</th>
-                <th>Score</th>
-            </tr>
-        </thead>
-        <tbody>
-            <c:forEach var="team" items="${teams}">
-            <tr>
-                <td>${team.hometeam}</td>
-                <td>${team.awayteam}</td>
-                <td>${team.homescore} - ${team.awayscore}</td>
-                <td><a href="delete/${team.id}">Delete</a></td>
-            </tr>
-            </c:forEach>
-        </tbody>                        
-    </table>    
 </c:if>
 
 </body>
